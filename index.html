@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty</title>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <li v-for="item in items" v-bind:key="item.id">
+                {{ item.name }}
+            </li>
+        </ol>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        const options = {
+            data() {
+                return {
+                    items: []
+                }
+            },
+            methods: {
+                fetchCharacters() {
+                    let x = this;
+                    axios.get('https://rickandmortyapi.com/api/character')
+                        .then(function (response) {
+                            // handle success
+                            const results = response.data.results;
+                            x.items =  results;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                        .then(function () {
+                            // always executed
+                        });
+                }
+            }
+        }
+
+        const vm = Vue.createApp(options).mount('#app')
+        vm.fetchCharacters()
+    </script>
+</body>
+
+</html>
