@@ -9,11 +9,14 @@
 
 <body>
     <div id="app">
-        <ol>
+        <ul>
             <li v-for="item in items" v-bind:key="item.id">
                 {{ item.name }}
             </li>
-        </ol>
+        </ul>
+        
+        <button class="btn btn-link" v-if="pageInfo.prev" v-on:click="fetchCharacters(pageInfo.prev)" :disabled="loading">Prev</h1>
+        <button class="btn btn-link" v-if="pageInfo.next" v-on:click="fetchCharacters(pageInfo.next)":disabled="loading">Next</h1>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -23,31 +26,34 @@
         const options = {
             data() {
                 return {
-                    items: []
+                    loading: false,
+                    items: [],
+                    pageInfo: {}
                 }
             },
             methods: {
-                fetchCharacters() {
-                    let x = this;
-                    axios.get('https://rickandmortyapi.com/api/character')
+                fetchCharacters(url) {
+                    this.loading = true;
+                    let self = this;
+                    
+                    axios.get(url)
                         .then(function (response) {
-                            // handle success
-                            const results = response.data.results;
-                            x.items =  results;
+                            self.items =  response.data.results;
+                            self.pageInfo = response.data.info;
                         })
                         .catch(function (error) {
-                            // handle error
+                            alert("Something went wrong. Please check your internet connection.");
                             console.log(error);
                         })
                         .then(function () {
-                            // always executed
+                            self.loading = false;
                         });
                 }
             }
         }
 
         const vm = Vue.createApp(options).mount('#app')
-        vm.fetchCharacters()
+        vm.fetchCharacters('https://rickandmortyapi.com/api/character')
     </script>
 </body>
 
