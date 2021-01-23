@@ -61,7 +61,12 @@ export default {
         {
           label: "Locations",
           icon: "pi pi-fw pi-map",
-          to: "/locations ",
+          to: "/locations",
+        },
+        {
+          label: "Episodes",
+          icon: "pi pi-fw pi-images",
+          to: "/episodes",
         },
         {
           label: "About",
