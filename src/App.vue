@@ -12,8 +12,6 @@
         </a>
       </template>
     </MenuBar>
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
   </div>
   <router-view />
 </template>
@@ -54,6 +52,11 @@ export default {
           label: "Home",
           icon: "pi pi-fw pi-home",
           to: "/",
+        },
+        {
+          label: "Characters",
+          icon: "pi pi-fw pi-users",
+          to: "/characters",
         },
         {
           label: "About",
