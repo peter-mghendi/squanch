@@ -1,48 +1,79 @@
 <template>
   <div class="home">
-    <ul>
-      <li v-for="item in items" v-bind:key="item.id">
-        {{ item.name }}
-      </li>
-    </ul>
+    <div class="p-grid p-mb-3">
+      <div
+        v-for="item in items"
+        v-bind:key="item.id"
+        class="p-col-12 p-md-6 p-lg-3"
+      >
+        <Card>
+          <template #header>
+            <img :alt="item.name" :src="item.image" />
+          </template>
+          <template #title>
+            {{ item.name }}
+          </template>
+        </Card>
+      </div>
+    </div>
 
-    <button
-      class="btn btn-link"
-      v-if="pageInfo.prev"
-      v-on:click="fetchCharacters(pageInfo.prev)"
-      :disabled="loading"
-    >
-      Prev
-    </button>
-    <button
-      class="btn btn-link"
-      v-if="pageInfo.next"
-      v-on:click="fetchCharacters(pageInfo.next)"
-      :disabled="loading"
-    >
-      Next
-    </button>
+    <div class="p-d-flex p-jc-center p-mb-3">
+      <Button
+        label="Prev"
+        class="p-button-outlined p-button-rounded p-mr-2"
+        :icon="[goingPrev ? 'pi pi-spin pi-spinner' : 'pi pi-angle-left']"
+        iconPos="left"
+        v-if="pageInfo.prev"
+        v-on:click="prev()"
+        :disabled="goingPrev || goingNext || loading"
+      />
+
+      <Button
+        label="Next"
+        class="p-button-outlined p-button-rounded p-ml-2"
+        :icon="[goingNext ? 'pi pi-spin pi-spinner' : 'pi pi-angle-right']"
+        iconPos="right"
+        v-if="pageInfo.next"
+        v-on:click="next()"
+        :disabled="goingPrev || goingNext || loading"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import Button from "primevue/button";
+import Card from "primevue/card";
+
 const axios = require("axios");
 
 export default {
   name: "Home",
+  components: { Button, Card },
   data: function() {
     return {
+      goingPrev: false,
+      goingNext: false,
       loading: false,
+
       items: [],
       pageInfo: {}
     };
   },
   created: function() {
-    this.fetchCharacters('https://rickandmortyapi.com/api/character')
+    this.loading = true;
+    this.fetchCharacters("https://rickandmortyapi.com/api/character");
   },
   methods: {
+    prev() {
+      this.goingPrev = true;
+      this.fetchCharacters(this.pageInfo.prev);
+    },
+    next() {
+      this.goingNext = true;
+      this.fetchCharacters(this.pageInfo.next);
+    },
     fetchCharacters(url) {
-      this.loading = true;
       let self = this;
 
       axios
@@ -56,11 +87,11 @@ export default {
           console.log(error);
         })
         .then(function() {
+          self.goingPrev = false;
+          self.goingNext = false;
           self.loading = false;
         });
     }
   }
 };
-
-// vm.fetchCharacters('https://rickandmortyapi.com/api/character')
 </script>
