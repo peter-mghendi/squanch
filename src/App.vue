@@ -59,6 +59,11 @@ export default {
           to: "/characters",
         },
         {
+          label: "Locations",
+          icon: "pi pi-fw pi-map",
+          to: "/locations ",
+        },
+        {
           label: "About",
           icon: "pi pi-fw pi-info-circle",
           to: "/about",
