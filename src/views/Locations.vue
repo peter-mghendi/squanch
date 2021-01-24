@@ -14,8 +14,8 @@
             {{ item.type }}
           </template>
           <template #content>
-            <p> Dimension: {{ item.dimension }} </p>
-            <p> Population: {{ item.residents.length }} </p>
+            <p>Dimension: {{ item.dimension }}</p>
+            <p>Population: {{ item.residents.length }}</p>
           </template>
         </Card>
       </div>
@@ -61,7 +61,7 @@ export default {
       loading: false,
 
       items: [],
-      pageInfo: {},
+      pageInfo: {}
     };
   },
   created: function() {
@@ -95,7 +95,7 @@ export default {
           self.goingNext = false;
           self.loading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>

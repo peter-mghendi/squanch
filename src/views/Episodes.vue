@@ -14,8 +14,8 @@
             {{ item.episode }}
           </template>
           <template #content>
-            <p> Aired On: {{ item.air_date }} </p>
-            <p> Featured {{ item.characters.length }} characters</p>
+            <p>Aired On: {{ item.air_date }}</p>
+            <p>Featured {{ item.characters.length }} characters</p>
           </template>
         </Card>
       </div>
@@ -61,7 +61,7 @@ export default {
       loading: false,
 
       items: [],
-      pageInfo: {},
+      pageInfo: {}
     };
   },
   created: function() {
@@ -95,7 +95,7 @@ export default {
           self.goingNext = false;
           self.loading = false;
         });
-    },
-  },
+    }
+  }
 };
 </script>

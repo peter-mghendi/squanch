@@ -2,12 +2,16 @@
   <div id="nav" class="p-mb-3">
     <MenuBar :model="items">
       <template #start>
-        <router-link to="/">
+        <router-link :to="{ name: 'home' }">
           <img alt="logo" src="./assets/logo.png" height="40" class="p-mx-2" />
         </router-link>
       </template>
       <template #end>
-        <a href="https://github.com/sixpeteunder/squanch" class="p-mx-3" style="color: black">
+        <a
+          href="https://github.com/sixpeteunder/squanch"
+          class="p-mx-3"
+          style="color: black"
+        >
           <span class="pi pi-github" style="font-size: 1.5rem"></span>
         </a>
       </template>
@@ -48,33 +52,33 @@ export default {
   data: function() {
     return {
       items: [
-        {
-          label: "Home",
-          icon: "pi pi-fw pi-home",
-          to: "/",
-        },
+        // {
+        //   label: "Home",
+        //   icon: "pi pi-fw pi-home",
+        //   to: { name: "home" }
+        // },
         {
           label: "Characters",
           icon: "pi pi-fw pi-users",
-          to: "/characters",
+          to: { name: "characters" }
         },
         {
           label: "Locations",
           icon: "pi pi-fw pi-map",
-          to: "/locations",
+          to: { name: "locations" }
         },
         {
           label: "Episodes",
           icon: "pi pi-fw pi-images",
-          to: "/episodes",
+          to: { name: "episodes" }
         },
         {
           label: "About",
           icon: "pi pi-fw pi-info-circle",
-          to: "/about",
-        },
-      ],
+          to: { name: "about" }
+        }
+      ]
     };
-  },
+  }
 };
 </script>
