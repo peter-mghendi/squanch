@@ -25,7 +25,7 @@
       <Button
         label="Prev"
         class="p-button-outlined p-button-rounded p-mr-2"
-        :icon="[goingPrev ? 'pi pi-spin pi-spinner' : 'pi pi-angle-left']"
+        :icon="goingPrev ? 'pi pi-spin pi-spinner' : 'pi pi-angle-left'"
         iconPos="left"
         v-if="pageInfo.prev"
         v-on:click="prev()"
@@ -35,7 +35,7 @@
       <Button
         label="Next"
         class="p-button-outlined p-button-rounded p-ml-2"
-        :icon="[goingNext ? 'pi pi-spin pi-spinner' : 'pi pi-angle-right']"
+        :icon="goingNext ? 'pi pi-spin pi-spinner' : 'pi pi-angle-right'"
         iconPos="right"
         v-if="pageInfo.next"
         v-on:click="next()"
