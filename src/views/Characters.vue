@@ -11,7 +11,31 @@
             <img :alt="item.name" :src="item.image" />
           </template>
           <template #title>
-            {{ item.name }}
+            <router-link
+              :to="{ name: 'character-details', params: { id: item.id } }"
+              style="text-decoration: none"
+              class="p-text-light"
+            >
+              {{ item.name }}
+            </router-link>
+          </template>
+          <template #subtitle>
+            <span
+              class="pi pi-circle-on p-mr-2"
+              :style="{
+                color:
+                  item.status == 'Alive'
+                    ? 'green'
+                    : item.status == 'Dead'
+                    ? 'red'
+                    : 'yellow',
+                'font-size': '0.75rem'
+              }"
+            ></span>
+            {{ item.status }}, {{ item.species }}
+          </template>
+          <template #content>
+            Last known location: {{ item.location.name }}
           </template>
         </Card>
       </div>
@@ -21,7 +45,7 @@
       <Button
         label="Prev"
         class="p-button-outlined p-button-rounded p-mr-2"
-        :icon="[goingPrev ? 'pi pi-spin pi-spinner' : 'pi pi-angle-left']"
+        :icon="goingPrev ? 'pi pi-spin pi-spinner' : 'pi pi-angle-left'"
         iconPos="left"
         v-if="pageInfo.prev"
         v-on:click="prev()"
@@ -31,7 +55,7 @@
       <Button
         label="Next"
         class="p-button-outlined p-button-rounded p-ml-2"
-        :icon="[goingNext ? 'pi pi-spin pi-spinner' : 'pi pi-angle-right']"
+        :icon="goingNext ? 'pi pi-spin pi-spinner' : 'pi pi-angle-right'"
         iconPos="right"
         v-if="pageInfo.next"
         v-on:click="next()"

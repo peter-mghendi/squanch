@@ -14,6 +14,24 @@ const routes = [
       import(/* webpackChunkName: "characters" */ "../views/Characters.vue")
   },
   {
+    path: "/characters/:id",
+    name: "character",
+    component: () =>
+      import(/* webpackChunkName: "character" */ "../views/Character.vue"),
+    children: [
+      {
+        path: "details",
+        name: "character-details",
+        component: () => import("../views/Character/CharacterDetails")
+      },
+      {
+        path: "episodes",
+        name: "character-episodes",
+        component: () => import("../views/Character/CharacterEpisodes")
+      }
+    ]
+  },
+  {
     path: "/locations",
     name: "locations",
     component: () =>
@@ -25,12 +43,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "locations" */ "../views/Episodes.vue")
   },
-  // {
-  //   path: "/characters/:id",
-  //   name: "character",
-  //   component: () =>
-  //     import(/* webpackChunkName: "character" */ "../views/Character.vue"),
-  // },
   {
     path: "/about",
     name: "about",
