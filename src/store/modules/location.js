@@ -6,7 +6,7 @@ export default {
   state: function() {
     return {
       location: {},
-      loading: false
+      loading: false,
     };
   },
   mutations: {
@@ -15,7 +15,7 @@ export default {
     },
     setLoading: function(state, loading) {
       state.loading = loading;
-    }
+    },
   },
   actions: {
     fetchLocationAsync: function({ commit }, id) {
@@ -23,22 +23,22 @@ export default {
 
       axios
         .get(`${apiUrl}/location/${id}`)
-        .then(response => {
-          //   let data = response.data;
-          //   const residentIds = data.residents
-          //     .map((resident) => resident.split("/").slice(-1)[0])
-          //     .join();
+        .then((response) => {
+          let data = response.data;
+          const residentIds = data.residents
+            .map((resident) => resident.split("/").slice(-1)[0])
+            .join();
 
-          //   axios.get(`${apiUrl}/character/${residentIds}`).then((response) => {
-          //     data.residents = response.data;
-          commit("setLocation", response.data);
-          //   });
+          axios.get(`${apiUrl}/character/${residentIds}`).then((response) => {
+            data.residents = Array.isArray(response.data) ? response.data : [response.data];
+            commit("setLocation", data);
+          });
         })
-        .catch(error => {
+        .catch((error) => {
           alert("Something went wrong. Please check your internet connection.");
           console.log(error);
         })
         .then(() => commit("setLoading", false));
-    }
-  }
+    },
+  },
 };
