@@ -8,7 +8,13 @@
       >
         <Card>
           <template #title>
-            {{ item.name }}
+            <router-link
+              :to="{ name: 'episode', params: { id: item.id } }"
+              style="text-decoration: none"
+              class="p-text-light"
+            >
+              {{ item.name }}
+            </router-link>
           </template>
           <template #subtitle>
             {{ item.episode }}
