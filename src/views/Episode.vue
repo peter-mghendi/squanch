@@ -11,7 +11,17 @@
         <h1 class="p-text-light">{{ episode.episode }} : {{ episode.name }}</h1>
       </span>
     </div>
-    <p>Aired on: {{episode.air_date}}</p>
+    <p>Aired on: {{ episode.air_date }}</p>
+    <h2>Featured Characters</h2>
+    <router-link
+      v-for="character in episode.characters"
+      :key="character.id"
+      :to="{ name: 'character-details', params: { id: character.id } }"
+      style="text-decoration: none"
+      class="p-mr-2"
+    >
+      <Chip :label="character.name" :image="character.image" />
+    </router-link>
   </div>
 </template>
 
@@ -19,12 +29,13 @@
 import { mapState } from "vuex";
 
 import Button from "primevue/button";
+import Chip from "primevue/chip";
 
 import Loader from "../components/Loader.vue";
 
 export default {
   name: "Episode",
-  components: { Button, Loader },
+  components: { Button, Chip, Loader },
   computed: mapState({
     episode: (state) => state.episode.episode,
     loading: (state) => state.episode.loading,
@@ -36,7 +47,7 @@ export default {
   },
   created: function() {
     this.$store.dispatch("episode/fetchEpisodeAsync", this.$route.params.id);
-  }
+  },
 };
 </script>
 

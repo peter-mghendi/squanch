@@ -24,15 +24,15 @@ export default {
       axios
         .get(`${apiUrl}/episode/${id}`)
         .then((response) => {
-        //   let data = response.data;
-        //   const episodeIds = data.episode
-        //     .map((episode) => episode.split("/").slice(-1)[0])
-        //     .join();
+          let data = response.data;
+          const characterIds = data.characters
+            .map((character) => character.split("/").slice(-1)[0])
+            .join();
 
-        //   axios.get(`${apiUrl}/episode/${episodeIds}`).then((response) => {
-        //     data.episodes = response.data;
-            commit("setEpisode", response.data);
-        //   });
+          axios.get(`${apiUrl}/character/${characterIds}`).then((response) => {
+            data.characters = response.data;
+            commit("setEpisode", data);
+          });
         })
         .catch((error) => {
           alert("Something went wrong. Please check your internet connection.");
