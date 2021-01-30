@@ -20,6 +20,14 @@
   <router-view />
 </template>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap');
+
+* {
+  font-family: 'Nunito', sans-serif;
+}
+</style>
+
 <script>
 import MenuBar from "primevue/menubar";
 

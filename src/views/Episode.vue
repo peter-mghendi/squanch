@@ -11,7 +11,7 @@
         <h1 class="p-text-light">{{ episode.episode }} : {{ episode.name }}</h1>
       </span>
     </div>
-    <p>Aired on: {{ episode.air_date }}</p>
+    <p>Episode aired {{ episode.air_date }}.</p>
     <h2>Featured Characters</h2>
     <router-link
       v-for="character in episode.characters"

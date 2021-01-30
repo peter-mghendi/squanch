@@ -10,6 +10,8 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import store from "./store";
 
+console.log("Wubbalubbadubdub");
+
 createApp(App)
   .use(store)
   .use(router)
