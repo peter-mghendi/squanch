@@ -42,8 +42,8 @@ export default {
   name: "Character",
   components: { Avatar, Button, Loader, TabMenu },
   computed: mapState({
-    character: state => state.character,
-    loading: state => state.loading
+    character: state => state.character.character,
+    loading: state => state.character.loading
   }),
   data: function() {
     return {
@@ -69,11 +69,11 @@ export default {
   },
   beforeRouteUpdate(to, from) {
     if (to.params.id !== from.params.id) {
-      this.$store.dispatch("fetchCharacterAsync", to.params.id);
+      this.$store.dispatch("character/fetchCharacterAsync", to.params.id);
     }
   },
   created: function() {
-    this.$store.dispatch("fetchCharacterAsync", this.$route.params.id);
+    this.$store.dispatch("character/fetchCharacterAsync", this.$route.params.id);
   }
 };
 </script>

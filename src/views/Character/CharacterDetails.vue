@@ -26,7 +26,7 @@ export default {
       ];
     },
     ...mapState({
-      character: state => state.character
+      character: state => state.character.character
     })
   }
 };

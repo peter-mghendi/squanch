@@ -40,7 +40,7 @@ export default {
   components: { Button, Card, Timeline },
   computed: {
     ...mapState({
-      character: (state) => state.character,
+      character: (state) => state.character.character,
     }),
   },
 };
