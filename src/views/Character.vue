@@ -19,7 +19,7 @@
     </div>
 
     <TabMenu :model="menuItems" />
-    <router-view />
+    <router-view class="p-py-4"/>
   </div>
 </template>
 

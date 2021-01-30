@@ -1,12 +1,13 @@
 import { createStore } from "vuex";
 
+const apiUrl = "https://rickandmortyapi.com/api";
 const axios = require("axios");
 
 export default createStore({
   state: function() {
     return {
       character: {},
-      loading: false
+      loading: false,
     };
   },
   mutations: {
@@ -15,25 +16,31 @@ export default createStore({
     },
     setLoading: function(state, loading) {
       state.loading = loading;
-    }
+    },
   },
   actions: {
     fetchCharacterAsync: function({ commit }, id) {
       commit("setLoading", true);
 
       axios
-        .get(`https://rickandmortyapi.com/api/character/${id}`)
-        .then(function(response) {
-          commit("setCharacter", response.data);
+        .get(`${apiUrl}/character/${id}`)
+        .then((response) => {
+          let data = response.data;
+          const episodeIds = data.episode
+            .map((episode) => episode.split("/").slice(-1)[0])
+            .join();
+
+          axios.get(`${apiUrl}/episode/${episodeIds}`).then((response) => {
+            data.episodes = response.data;
+            commit("setCharacter", data);
+          });
         })
-        .catch(function(error) {
+        .catch((error) => {
           alert("Something went wrong. Please check your internet connection.");
           console.log(error);
         })
-        .then(function() {
-          commit("setLoading", false);
-        });
-    }
+        .then(() => commit("setLoading", false));
+    },
   },
-  modules: {}
+  modules: {},
 });
