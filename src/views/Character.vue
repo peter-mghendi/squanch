@@ -19,7 +19,7 @@
     </div>
 
     <TabMenu :model="menuItems" />
-    <router-view class="p-py-4"/>
+    <router-view class="p-py-4" />
   </div>
 </template>
 
@@ -73,7 +73,10 @@ export default {
     }
   },
   created: function() {
-    this.$store.dispatch("character/fetchCharacterAsync", this.$route.params.id);
+    this.$store.dispatch(
+      "character/fetchCharacterAsync",
+      this.$route.params.id
+    );
   }
 };
 </script>

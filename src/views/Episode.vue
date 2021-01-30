@@ -37,8 +37,8 @@ export default {
   name: "Episode",
   components: { Button, Chip, Loader },
   computed: mapState({
-    episode: (state) => state.episode.episode,
-    loading: (state) => state.episode.loading,
+    episode: state => state.episode.episode,
+    loading: state => state.episode.loading
   }),
   beforeRouteUpdate(to, from) {
     if (to.params.id !== from.params.id) {
@@ -47,7 +47,7 @@ export default {
   },
   created: function() {
     this.$store.dispatch("episode/fetchEpisodeAsync", this.$route.params.id);
-  },
+  }
 };
 </script>
 

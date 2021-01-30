@@ -7,12 +7,12 @@ module.exports = {
             test: /\.m?jsx?$/,
             loader: "babel-loader",
             options: {
-              plugins: ["@babel/plugin-proposal-optional-chaining"],
+              plugins: ["@babel/plugin-proposal-optional-chaining"]
             },
-            include: /node_modules\/primevue/,
-          },
-        ],
-      },
+            include: /node_modules\/primevue/
+          }
+        ]
+      }
     };
-  },
+  }
 };

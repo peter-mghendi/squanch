@@ -36,9 +36,9 @@ export default {
   components: { Card, Timeline },
   computed: {
     ...mapState({
-      character: (state) => state.character.character,
-    }),
-  },
+      character: state => state.character.character
+    })
+  }
 };
 </script>
 

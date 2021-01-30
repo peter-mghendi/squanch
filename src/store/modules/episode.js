@@ -6,7 +6,7 @@ export default {
   state: function() {
     return {
       episode: {},
-      loading: false,
+      loading: false
     };
   },
   mutations: {
@@ -15,7 +15,7 @@ export default {
     },
     setLoading: function(state, loading) {
       state.loading = loading;
-    },
+    }
   },
   actions: {
     fetchEpisodeAsync: function({ commit }, id) {
@@ -23,22 +23,22 @@ export default {
 
       axios
         .get(`${apiUrl}/episode/${id}`)
-        .then((response) => {
+        .then(response => {
           let data = response.data;
           const characterIds = data.characters
-            .map((character) => character.split("/").slice(-1)[0])
+            .map(character => character.split("/").slice(-1)[0])
             .join();
 
-          axios.get(`${apiUrl}/character/${characterIds}`).then((response) => {
+          axios.get(`${apiUrl}/character/${characterIds}`).then(response => {
             data.characters = response.data;
             commit("setEpisode", data);
           });
         })
-        .catch((error) => {
+        .catch(error => {
           alert("Something went wrong. Please check your internet connection.");
           console.log(error);
         })
         .then(() => commit("setLoading", false));
-    },
-  },
+    }
+  }
 };
