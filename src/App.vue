@@ -2,43 +2,30 @@
   <div id="nav" class="p-mb-3">
     <MenuBar :model="items">
       <template #start>
-        <router-link to="/">
+        <router-link :to="{ name: 'home' }">
           <img alt="logo" src="./assets/logo.png" height="40" class="p-mx-2" />
         </router-link>
       </template>
       <template #end>
-        <a href="https://github.com/sixpeteunder/squanch" class="p-mx-3" style="color: black">
+        <a
+          href="https://github.com/sixpeteunder/squanch"
+          class="p-mx-3"
+          style="color: black"
+        >
           <span class="pi pi-github" style="font-size: 1.5rem"></span>
         </a>
       </template>
     </MenuBar>
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
   </div>
   <router-view />
 </template>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap');
 
-/* #nav {
-  padding: 30px;
+* {
+  font-family: 'Nunito', sans-serif;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>
 
 <script>
@@ -50,18 +37,33 @@ export default {
   data: function() {
     return {
       items: [
+        // {
+        //   label: "Home",
+        //   icon: "pi pi-fw pi-home",
+        //   to: { name: "home" }
+        // },
         {
-          label: "Home",
-          icon: "pi pi-fw pi-home",
-          to: "/",
+          label: "Characters",
+          icon: "pi pi-fw pi-users",
+          to: { name: "characters" }
+        },
+        {
+          label: "Locations",
+          icon: "pi pi-fw pi-map",
+          to: { name: "locations" }
+        },
+        {
+          label: "Episodes",
+          icon: "pi pi-fw pi-images",
+          to: { name: "episodes" }
         },
         {
           label: "About",
           icon: "pi pi-fw pi-info-circle",
-          to: "/about",
-        },
-      ],
+          to: { name: "about" }
+        }
+      ]
     };
-  },
+  }
 };
 </script>
