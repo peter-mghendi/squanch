@@ -10,7 +10,7 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import store from "./store";
 
-console.log("Wubbalubbadubdub");
+console.log("Wubba lubba dub dubs!!");
 
 createApp(App)
   .use(store)
