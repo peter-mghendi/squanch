@@ -6,7 +6,7 @@
       </template>
 
       <template #subtitle>
-        Welcome to the schwiftiest encyclopaedia you didn't know you needed!
+        Welcome to the schwiftiest encyclopedia you didn't know you needed!
       </template>
 
       <template #content>

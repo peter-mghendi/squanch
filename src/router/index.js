@@ -1,17 +1,17 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: Home,
   },
   {
     path: "/characters",
     name: "characters",
     component: () =>
-      import(/* webpackChunkName: "characters" */ "../views/Characters.vue")
+      import(/* webpackChunkName: "characters" */ "../views/Characters.vue"),
   },
   {
     path: "/characters/:id",
@@ -22,53 +22,56 @@ const routes = [
       {
         path: "details",
         name: "character-details",
-        component: () => import("../views/Character/CharacterDetails")
+        component: () => import("../views/Character/CharacterDetails"),
       },
       {
         path: "episodes",
         name: "character-episodes",
-        component: () => import("../views/Character/CharacterEpisodes")
-      }
-    ]
+        component: () => import("../views/Character/CharacterEpisodes"),
+      },
+    ],
   },
   {
     path: "/locations",
     name: "locations",
     component: () =>
-      import(/* webpackChunkName: "locations" */ "../views/Locations.vue")
+      import(/* webpackChunkName: "locations" */ "../views/Locations.vue"),
   },
   {
     path: "/locations/:id",
     name: "location",
     component: () =>
-      import(/* webpackChunkName: "location" */ "../views/Location.vue")
+      import(/* webpackChunkName: "location" */ "../views/Location.vue"),
   },
   {
     path: "/episodes",
     name: "episodes",
     component: () =>
-      import(/* webpackChunkName: "episodes" */ "../views/Episodes.vue")
+      import(/* webpackChunkName: "episodes" */ "../views/Episodes.vue"),
   },
   {
     path: "/episodes/:id",
     name: "episode",
     component: () =>
-      import(/* webpackChunkName: "episode" */ "../views/Episode.vue")
+      import(/* webpackChunkName: "episode" */ "../views/Episode.vue"),
   },
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/:x(.*)",
+    name: "not-found",
+    component: () =>
+      import(/* webpackChunkName: "not-found" */ "../views/NotFound.vue"),
+  },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+  history: createWebHistory(),
+  routes,
 });
 
 export default router;
