@@ -21,10 +21,10 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap");
 
 * {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 </style>
 

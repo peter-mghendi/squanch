@@ -89,21 +89,21 @@ export default {
             {
               label: "Characters",
               icon: "pi pi-fw pi-users",
-              to: { name: "characters" },
+              to: { name: "characters" }
             },
             {
               label: "Locations",
               icon: "pi pi-fw pi-map",
-              to: { name: "locations" },
+              to: { name: "locations" }
             },
             {
               label: "Episodes",
               icon: "pi pi-fw pi-images",
-              to: { name: "episodes" },
-            },
-          ],
-        },
-      ],
+              to: { name: "episodes" }
+            }
+          ]
+        }
+      ]
     };
   },
   created: function() {
@@ -111,8 +111,8 @@ export default {
       .get(
         "https://rick-and-morty-api-phrases.herokuapp.com/phrases/en_us/random"
       )
-      .then((response) => (this.quote = response.data.phrase))
-      .catch((error) => {
+      .then(response => (this.quote = response.data.phrase))
+      .catch(error => {
         this.quote = "Get schwifty!";
         console.log(error);
       });
@@ -127,14 +127,14 @@ export default {
           .share({
             url: "https://squanch.netlify.app",
             text: "Check out this Rick and Morty encyclopaedia!",
-            title: "Squanch",
+            title: "Squanch"
           })
-          .catch((error) => console.log(error));
+          .catch(error => console.log(error));
       } else console.log("Error while sharing.");
     },
     goToGitHub() {
       window.location.href = "https://github.com/sixpeteunder/squanch";
-    },
-  },
+    }
+  }
 };
 </script>

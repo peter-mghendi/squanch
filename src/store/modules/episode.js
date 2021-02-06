@@ -30,7 +30,9 @@ export default {
             .join();
 
           axios.get(`${apiUrl}/character/${characterIds}`).then(response => {
-            data.characters = Array.isArray(response.data) ? response.data : [response.data];
+            data.characters = Array.isArray(response.data)
+              ? response.data
+              : [response.data];
             commit("setEpisode", data);
           });
         })

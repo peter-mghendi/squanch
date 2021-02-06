@@ -34,7 +34,7 @@ import { mapState } from "vuex";
 import Button from "primevue/button";
 import Chip from "primevue/chip";
 import Column from "primevue/column";
-import DataTable from "primevue/datatable"
+import DataTable from "primevue/datatable";
 
 import Loader from "../components/Loader.vue";
 
