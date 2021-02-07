@@ -1,7 +1,6 @@
-import { UrlUtils } from "../utils/UrlUtils";
 import axios from "axios";
+import { UrlUtils } from "../utils/UrlUtils";
 
-// const axios = require("axios");
 const apiUrl = "https://rickandmortyapi.com/api";
 
 export class RickAndMortyService {

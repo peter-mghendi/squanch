@@ -70,11 +70,11 @@
 </template>
 
 <script>
-const axios = require("axios");
-
 import Button from "primevue/button";
 import Card from "primevue/card";
 import Menu from "primevue/menu";
+
+import { QuotesService } from "../services/QuotesService";
 
 export default {
   name: "Home",
@@ -107,10 +107,7 @@ export default {
     };
   },
   created: function() {
-    axios
-      .get(
-        "https://rick-and-morty-api-phrases.herokuapp.com/phrases/en_us/random"
-      )
+    QuotesService.getRandomQuote()
       .then(response => (this.quote = response.data.phrase))
       .catch(error => {
         this.quote = "Get schwifty!";
