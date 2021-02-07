@@ -1,4 +1,7 @@
-const axios = require("axios");
+import { UrlUtils } from "../utils/UrlUtils";
+import axios from "axios";
+
+// const axios = require("axios");
 const apiUrl = "https://rickandmortyapi.com/api";
 
 export class RickAndMortyService {
@@ -36,50 +39,41 @@ export class RickAndMortyService {
   }
 
   static getCharacter(id) {
-    if (!Number.isInteger(id)) {
-      throw new Error("wrong parameter type");
-    }
-
-    return axios.get(`${apiUrl}/character/${id}`).then(response => {
-      let data = response.data;
-      this.getEpisodes(this.extractIds(data.episode)).then(
-        response =>
-          (data.episodes = Array.isArray(response.data)
-            ? response.data
-            : [response.data])
+    return axios.get(`${apiUrl}/character/${id}`).then(async res => {
+      let data = res.data;
+      const response = await this.getEpisodes(
+        UrlUtils.extractIds(data.episode)
       );
+      data.episodes = Array.isArray(response.data)
+        ? response.data
+        : [response.data];
+      return data;
     });
   }
 
   static getLocation(id) {
-    if (!Number.isInteger(id)) {
-      throw new Error("wrong parameter type");
-    }
-
-    return axios.get(`${apiUrl}/location/${id}`).then(response => {
-      let data = response.data;
-      this.getCharacters(this.extractIds(data.residents)).then(
-        response =>
-          (data.residents = Array.isArray(response.data)
-            ? response.data
-            : [response.data])
+    return axios.get(`${apiUrl}/location/${id}`).then(async res => {
+      let data = res.data;
+      const response = await this.getCharacters(
+        UrlUtils.extractIds(data.residents)
       );
+      data.residents = Array.isArray(response.data)
+        ? response.data
+        : [response.data];
+      return data;
     });
   }
 
   static getEpisode(id) {
-    if (!Number.isInteger(id)) {
-      throw new Error("wrong parameter type");
-    }
-
-    return axios.get(`${apiUrl}/episode/${id}`).then(response => {
-      let data = response.data;
-      this.getCharacters(this.extractIds(data.characters)).then(
-        response =>
-          (data.characters = Array.isArray(response.data)
-            ? response.data
-            : [response.data])
+    return axios.get(`${apiUrl}/episode/${id}`).then(async res => {
+      let data = res.data;
+      const response = await this.getCharacters(
+        UrlUtils.extractIds(data.characters)
       );
+      data.characters = Array.isArray(response.data)
+        ? response.data
+        : [response.data];
+      return data;
     });
   }
 }

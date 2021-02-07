@@ -1,5 +1,4 @@
-const apiUrl = "https://rickandmortyapi.com/api";
-const axios = require("axios");
+import { RickAndMortyService } from "../../services/RickAndMortyService";
 
 export default {
   namespaced: true,
@@ -21,21 +20,8 @@ export default {
     fetchLocationAsync: function({ commit }, id) {
       commit("setLoading", true);
 
-      axios
-        .get(`${apiUrl}/location/${id}`)
-        .then(response => {
-          let data = response.data;
-          const residentIds = data.residents
-            .map(resident => resident.split("/").slice(-1)[0])
-            .join();
-
-          axios.get(`${apiUrl}/character/${residentIds}`).then(response => {
-            data.residents = Array.isArray(response.data)
-              ? response.data
-              : [response.data];
-            commit("setLocation", data);
-          });
-        })
+      RickAndMortyService.getLocation(id)
+        .then(data => commit("setLocation", data))
         .catch(error => {
           alert("Something went wrong. Please check your internet connection.");
           console.log(error);
