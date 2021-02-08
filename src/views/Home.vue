@@ -123,7 +123,7 @@ export default {
         navigator
           .share({
             url: "https://squanch.netlify.app",
-            text: "Check out this Rick and Morty encyclopaedia!",
+            text: "Check out the schwiftiest encyclopaedia you never knew you needed!",
             title: "Squanch"
           })
           .catch(error => console.log(error));
