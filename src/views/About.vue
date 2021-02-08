@@ -45,8 +45,10 @@
             </a>
           </li>
           <!-- <li><a href="http://loremricksum.com">Lorem Ricksum</a></li> -->
-          <!-- <li><a href="">The Open Movie Database</a></li>
-          <li><a href="">The Movie Database</a></li> -->
+          <li>
+            <a href="https://omdbapi.com">The Open Movie Database</a>
+          </li>
+          <!-- <li><a href="">The Movie Database</a></li> -->
         </ul>
         <p>
           <small class="p-text-light">
