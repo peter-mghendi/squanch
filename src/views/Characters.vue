@@ -69,7 +69,8 @@
 import Button from "primevue/button";
 import Card from "primevue/card";
 
-const axios = require("axios");
+import { RickAndMortyService } from "../services/RickAndMortyService";
+import { UrlUtils } from "../utils/UrlUtils";
 
 export default {
   name: "Characters",
@@ -86,22 +87,21 @@ export default {
   },
   created: function() {
     this.loading = true;
-    this.fetchCharacters("https://rickandmortyapi.com/api/character");
+    this.fetchCharacters();
   },
   methods: {
     prev() {
       this.goingPrev = true;
-      this.fetchCharacters(this.pageInfo.prev);
+      this.fetchCharacters(UrlUtils.getUrlParam(this.pageInfo.prev, "page"));
     },
     next() {
       this.goingNext = true;
-      this.fetchCharacters(this.pageInfo.next);
+      this.fetchCharacters(UrlUtils.getUrlParam(this.pageInfo.next, "page"));
     },
-    fetchCharacters(url) {
+    fetchCharacters(page = 1) {
       let self = this;
 
-      axios
-        .get(url)
+      RickAndMortyService.getCharacters([], page)
         .then(function(response) {
           self.items = response.data.results;
           self.pageInfo = response.data.info;

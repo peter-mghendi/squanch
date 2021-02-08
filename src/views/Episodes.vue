@@ -55,7 +55,8 @@
 import Button from "primevue/button";
 import Card from "primevue/card";
 
-const axios = require("axios");
+import { RickAndMortyService } from "../services/RickAndMortyService";
+import { UrlUtils } from "../utils/UrlUtils";
 
 export default {
   name: "Episodes",
@@ -72,22 +73,22 @@ export default {
   },
   created: function() {
     this.loading = true;
-    this.fetchEpisodes("https://rickandmortyapi.com/api/episode");
+    this.fetchEpisodes();
   },
   methods: {
     prev() {
       this.goingPrev = true;
-      this.fetchEpisodes(this.pageInfo.prev);
+      this.fetchEpisodes(UrlUtils.getUrlParam(this.pageInfo.prev, "page"));
     },
     next() {
       this.goingNext = true;
-      this.fetchEpisodes(this.pageInfo.next);
+      this.fetchEpisodes(UrlUtils.getUrlParam(this.pageInfo.next, "page"));
+      console.log(UrlUtils.getUrlParam(this.pageInfo.next, "page"));
     },
-    fetchEpisodes(url) {
+    fetchEpisodes(page = 1) {
       let self = this;
 
-      axios
-        .get(url)
+      RickAndMortyService.getEpisodes([], page)
         .then(function(response) {
           self.items = response.data.results;
           self.pageInfo = response.data.info;

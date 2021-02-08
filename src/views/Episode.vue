@@ -12,6 +12,39 @@
       </span>
     </div>
     <p>Episode aired {{ episode.air_date }}.</p>
+
+    <div class="p-grid">
+      <div class="p-col-12 p-md-8">
+        <img
+          :src="episode.info.poster"
+          :alt="episode.episode"
+          style="width:100%"
+        />
+      </div>
+      <div class="p-col-12 p-md-4">
+        <p>
+          <i class="pi pi-tag p-mr-1"></i>
+          Rated: {{ episode.info.rated }}
+        </p>
+        <p>
+          <i class="pi pi-sort p-mr-1"></i>
+          IMDB Rating: {{ episode.info.rating }}
+        </p>
+        <p>
+          <i class="pi pi-video p-mr-1"></i>
+          Runtime: {{ episode.info.runtime }}
+        </p>
+        <a
+          :href="`https://imdb.com/title/${episode.info.imdbId}`"
+          target="_blank"
+        >
+          View on IMDB
+          <i class="pi pi-external-link p-ml-1"></i>
+        </a>
+      </div>
+      <div class="p-col-12">{{ episode.info.plot }}</div>
+    </div>
+
     <h2>Featured Characters</h2>
     <router-link
       v-for="character in episode.characters"

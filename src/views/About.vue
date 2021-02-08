@@ -57,7 +57,10 @@
       <template #footer>
         <small>
           &copy; {{ new Date().getFullYear() }}
-          <a href="https://github.com/sixpeteunder" target="_blank">sixpeteunder <i class="pi pi-external-link p-ml-1" style="font-size: 0.75rem"></i></a>
+          <a href="https://github.com/sixpeteunder" target="_blank"
+            >sixpeteunder
+            <i class="pi pi-external-link p-ml-1" style="font-size: 0.75rem"></i
+          ></a>
         </small>
       </template>
     </Card>
@@ -69,6 +72,6 @@ import Card from "primevue/card";
 
 export default {
   name: "About",
-  components: { Card },
+  components: { Card }
 };
 </script>

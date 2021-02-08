@@ -1,5 +1,5 @@
-const apiUrl = "https://rickandmortyapi.com/api";
-const axios = require("axios");
+import { OmdbService } from "../../services/OmdbService";
+import { RickAndMortyService } from "../../services/RickAndMortyService";
 
 export default {
   namespaced: true,
@@ -21,19 +21,23 @@ export default {
     fetchEpisodeAsync: function({ commit }, id) {
       commit("setLoading", true);
 
-      axios
-        .get(`${apiUrl}/episode/${id}`)
-        .then(response => {
-          let data = response.data;
-          const characterIds = data.characters
-            .map(character => character.split("/").slice(-1)[0])
-            .join();
+      RickAndMortyService.getEpisode(id)
+        .then(async data => {
+          const response = await OmdbService.getEpisodeInfo(data.episode);
+          const info = response.data;
 
-          axios.get(`${apiUrl}/character/${characterIds}`).then(response => {
-            data.characters = Array.isArray(response.data) ? response.data : [response.data];
-            commit("setEpisode", data);
-          });
+          data.info = {
+            imdbId: info.imdbID,
+            plot: info.Plot,
+            poster: info.Poster,
+            rated: info.Rated,
+            rating: info.imdbRating,
+            runtime: info.Runtime
+          };
+
+          return data;
         })
+        .then(data => commit("setEpisode", data))
         .catch(error => {
           alert("Something went wrong. Please check your internet connection.");
           console.log(error);

@@ -70,11 +70,11 @@
 </template>
 
 <script>
-const axios = require("axios");
-
 import Button from "primevue/button";
 import Card from "primevue/card";
 import Menu from "primevue/menu";
+
+import { QuotesService } from "../services/QuotesService";
 
 export default {
   name: "Home",
@@ -89,30 +89,27 @@ export default {
             {
               label: "Characters",
               icon: "pi pi-fw pi-users",
-              to: { name: "characters" },
+              to: { name: "characters" }
             },
             {
               label: "Locations",
               icon: "pi pi-fw pi-map",
-              to: { name: "locations" },
+              to: { name: "locations" }
             },
             {
               label: "Episodes",
               icon: "pi pi-fw pi-images",
-              to: { name: "episodes" },
-            },
-          ],
-        },
-      ],
+              to: { name: "episodes" }
+            }
+          ]
+        }
+      ]
     };
   },
   created: function() {
-    axios
-      .get(
-        "https://rick-and-morty-api-phrases.herokuapp.com/phrases/en_us/random"
-      )
-      .then((response) => (this.quote = response.data.phrase))
-      .catch((error) => {
+    QuotesService.getRandomQuote()
+      .then(response => (this.quote = response.data.phrase))
+      .catch(error => {
         this.quote = "Get schwifty!";
         console.log(error);
       });
@@ -127,14 +124,14 @@ export default {
           .share({
             url: "https://squanch.netlify.app",
             text: "Check out this Rick and Morty encyclopaedia!",
-            title: "Squanch",
+            title: "Squanch"
           })
-          .catch((error) => console.log(error));
+          .catch(error => console.log(error));
       } else console.log("Error while sharing.");
     },
     goToGitHub() {
       window.location.href = "https://github.com/sixpeteunder/squanch";
-    },
-  },
+    }
+  }
 };
 </script>
